@@ -26,12 +26,12 @@ public class chat_server extends JFrame {
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         message_output.setPreferredSize(new Dimension(450,375));
-        message_send.setPreferredSize(new Dimension(50,40));
 
         message_send.addActionListener(e -> {
             try {
                 String message;
                 message = message_input.getText().trim();
+                message_output.setText(message_output.getText().trim() + "\nServer: " + message);
                 dos.writeUTF(message);
             } catch(Exception ex) {
                 ex.printStackTrace();
@@ -68,9 +68,8 @@ public class chat_server extends JFrame {
 
             while(!message.equals("exit")) {
                 message = dis.readUTF();
-                message_output.setText(message_output.getText().trim() + "\n" + message);
+                message_output.setText(message_output.getText().trim() + "\nClient: " + message);
             }
-
         } catch(Exception e) {
             e.printStackTrace();
         }
